@@ -94,10 +94,12 @@ services:
   zammad-nginx:
     <<: *zammad-service
     command: ["zammad-nginx"]
+    # Only expose internally to other Docker services
     expose:
       - "${NGINX_PORT:-8080}"
-    ports:
-      - "${NGINX_EXPOSE_PORT:-8080}:${NGINX_PORT:-8080}"
+    # No host port mapping — your gateway Nginx will handle external access
+    # ports:
+    #   - "${NGINX_EXPOSE_PORT:-8080}:${NGINX_PORT:-8080}"
     depends_on:
       - zammad-railsserver
 
