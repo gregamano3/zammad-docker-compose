@@ -92,16 +92,16 @@ services:
     restart: ${RESTART:-always}
 
   zammad-nginx:
-  <<: *zammad-service
-  command: ["zammad-nginx"]
-  # internal container port stays 8080
-  expose:
-    - "8080"
-  # map to a free host port for external access
-  ports:
-    - "9080:8080"
-  depends_on:
-    - zammad-railsserver
+    <<: *zammad-service
+    command: ["zammad-nginx"]
+    # internal container port stays 8080
+    expose:
+      - "8080"
+    # map to a free host port for external access
+    ports:
+      - "9080:8080"
+    depends_on:
+      - zammad-railsserver
 
   zammad-postgresql:
     environment:
